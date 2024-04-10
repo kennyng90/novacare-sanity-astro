@@ -1,0 +1,103 @@
+import {defineField, defineType} from 'sanity'
+
+export default defineType({
+  name: 'article',
+  title: 'Article',
+  type: 'document',
+  groups: [
+    {
+      title: 'Content',
+      name: 'content',
+      default: true,
+    },
+    {
+      title: 'Teaser',
+      name: 'teaser',
+    },
+  ],
+  fields: [
+    defineField({
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'name',
+        maxLength: 96,
+      },
+      group: 'content',
+    }),
+    defineField({
+      name: 'ingress',
+      title: 'Ingress',
+      type: 'array',
+      of: [
+        {
+          title: 'Block',
+          type: 'block',
+        },
+      ],
+      group: 'content',
+    }),
+    defineField({
+      name: 'mainBody',
+      title: 'MainBody',
+      type: 'array',
+      of: [
+        {
+          title: 'Block',
+          type: 'block',
+        },
+        {
+          title: 'Image',
+          type: 'image',
+        },
+      ],
+      group: 'content',
+    }),
+    defineField({
+      name: 'teaserImage',
+      title: 'Teaser image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      group: 'teaser',
+    }),
+    defineField({
+      name: 'teaserTitle',
+      title: 'Teaser title',
+      type: 'string',
+      group: 'teaser',
+    }),
+    defineField({
+      name: 'teaserText',
+      title: 'Teaser text',
+      type: 'array',
+      of: [
+        {
+          title: 'Block',
+          type: 'block',
+        },
+      ],
+      group: 'teaser',
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'name',
+      media: 'teaserImage',
+    },
+  },
+})
