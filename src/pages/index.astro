@@ -1,98 +1,21 @@
 ---
 import { sanityClient } from "../sanity-client";
-import { listGroq } from "../groq/list";
+import { LIST_QUERY } from "../groq/list";
 import Layout from "../layouts/Layout.astro";
+import type { List, Employee } from "../../sanity.types";
+import "../styles/global.css";
+import Card from "../components/card.astro";
 
-const data = await sanityClient.fetch(listGroq);
+const data: List = await sanityClient.fetch(LIST_QUERY);
+const employee: Employee[] = data?.items ?? [];
 ---
 
 <Layout title='Welcome to Astro.'>
-  <h1>{data.mainBody[0].children[0]?.text}</h1>
+  <div class='w-full mx-auto max-w-[1040px]'>
+    <h1 class='my-10 pt-10 font-semibold text-4xl'>{data.name}</h1>
 
-  <img
-    src='https://images.ctfassets.net/rag9hb99eki6/B7NOhJhx21UALURxyAqE0/b7bb00e4e9446ec0f0c4ffcedbb5e15c/novacarelogo.svg'
-    alt=''
-  />
-
-  <img
-    class='the-boss'
-    src='https://images.ctfassets.net/rag9hb99eki6/4TlHICyFEM6GsRXocZklXj/b2d50c199b7eb1a383617c9fdb1cb7cf/kjetil-melsom-olsen.jpg'
-    alt=''
-  />
+    <ul class='grid sm:grid-cols-3 gap-5'>
+      {employee.map((employee) => <Card {employee} />)}
+    </ul>
+  </div>
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-
-  .the-boss {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    animation: blinker 1s linear infinite;
-  }
-
-  @-webkit-keyframes blinker {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-</style>
