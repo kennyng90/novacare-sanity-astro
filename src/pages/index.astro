@@ -2,12 +2,11 @@
 import { sanityClient } from "../sanity-client";
 import { LIST_QUERY } from "../groq/list";
 import Layout from "../layouts/Layout.astro";
-import type { List, Employee } from "../../sanity.types";
 import "../styles/global.css";
 import Card from "../components/card.astro";
 
-const data: List = await sanityClient.fetch(LIST_QUERY);
-const employee: Employee[] = data?.items ?? [];
+const data = await sanityClient.fetch(LIST_QUERY);
+const employee = data?.items ?? [];
 ---
 
 <Layout title='Welcome to Astro.'>
@@ -15,7 +14,7 @@ const employee: Employee[] = data?.items ?? [];
     <h1 class='my-10 pt-10 font-semibold text-4xl'>{data.name}</h1>
 
     <ul class='grid sm:grid-cols-3 gap-5'>
-      {employee.map((employee) => <Card {employee} />)}
+      {employee.map((employee: any) => <Card {employee} />)}
     </ul>
   </div>
 </Layout>
