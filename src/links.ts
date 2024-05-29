@@ -19,4 +19,9 @@ export const links = [
     name: "#Typegen",
     url: "/",
   },
+  {
+    id: 5,
+    name: "#Sanity Studio Updates",
+    url: "https://www.sanity.io/changelog/d293f05d-bc3e-447d-af87-4a52dc3a671f",
+  },
 ];
