@@ -3,7 +3,7 @@ import { sanityClient } from "../sanity-client";
 import { LIST_QUERY } from "../groq/list";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
-import Card from "../components/card.astro";
+import Card from "../components/Card.astro";
 
 const data = await sanityClient.fetch(LIST_QUERY);
 const employee = data?.items;

@@ -25,7 +25,7 @@ export default defineType({
       title: "Items",
       name: "items",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "employee" }] }],
+      of: [{ type: "reference", to: [{ type: "customerReference" }, { type: "employee" }] }],
     }),
   ],
   preview: {
