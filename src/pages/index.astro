@@ -1,26 +1,30 @@
 ---
-import { sanityClient } from "../sanity-client";
-import { LIST_QUERY } from "../groq/list";
-import Layout from "../layouts/Layout.astro";
-import "../styles/global.css";
-import Card from "../components/Card.astro";
-
-const data = await sanityClient.fetch(LIST_QUERY);
-const employee = data?.items;
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import heroImg from "../assets/typegen.webp";
+import { links } from "src/links";
 ---
 
-<Layout title='Welcome to Astro.'>
-  <div class='w-full px-4 py-5 mx-auto grid justify-center max-w-[1040px]'>
-    <h1 class='my-10 pt-1 font-semibold text-4xl'>{data.name}</h1>
+<Layout title='Novacare x Sanity Fagdag'>
+  <header>
+    <nav class='flex justify-end py-5 px-10'>
+      <a class='underline hover:no-underline' href='/employees'>Menneskene</a>
+    </nav>
+  </header>
+  <div class='w-full px-4 h-full gap-10 mx-auto grid justify-center'>
+    <h1 class='font-semibold text-4xl text-center'>Novacare + Sanity = 💖</h1>
+    <Image class='rounded-xl' src={heroImg} alt='' />
 
-    {
-      employee && (
-        <ul class='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
-          {employee.map((employee: any) => (
-            <Card {employee} />
-          ))}
-        </ul>
-      )
-    }
+    <ul class='flex gap-4 justify-center'>
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.url} target='_blank' class='badge badge-outline'>
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </Layout>
