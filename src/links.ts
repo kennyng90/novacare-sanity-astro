@@ -17,7 +17,7 @@ export const links = [
   {
     id: 4,
     name: "#Typegen",
-    url: "/",
+    url: "https://www.sanity.io/learn/course/typescripted-content/extracting-your-schema",
   },
   {
     id: 5,
