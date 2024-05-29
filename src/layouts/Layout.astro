@@ -3,7 +3,7 @@ import "@/styles/global.css";
 import ViewTransitions from "astro/components/ViewTransitions.astro";
 
 interface Props {
-  title: string | undefined;
+  title: string | undefined | null;
 }
 
 const { title } = Astro.props;
